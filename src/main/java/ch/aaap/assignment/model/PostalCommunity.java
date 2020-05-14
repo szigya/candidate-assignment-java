@@ -1,12 +1,26 @@
 package ch.aaap.assignment.model;
 
-public interface PostalCommunity {
+import java.util.HashSet;
+import java.util.Set;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-  public String getZipCode();
+@Data
+@Builder
+@ToString(exclude = "politicalCommunities")
+@EqualsAndHashCode(of = {"zipCode", "zipCodeAddition"})
+public class PostalCommunity {
 
-  public String getZipCodeAddition();
+  private final Set<PoliticalCommunity> politicalCommunities = new HashSet<>();
+  private String zipCode;
+  private String zipCodeAddition;
+  private String name;
+  private Canton canton;
 
-  public String getName();
+  public void addPoliticalCommunity(PoliticalCommunity politicalCommunity) {
+    this.politicalCommunities.add(politicalCommunity);
+  }
 
-  // TODO add more features here representing the relations
 }
